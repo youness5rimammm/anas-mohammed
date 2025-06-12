@@ -804,9 +804,8 @@ body.nav-active { overflow: hidden; }
   display: flex;
   align-items: flex-start;
   gap: 30px;
-  overflow: auto;
   scroll-snap-type: inline mandatory;
-  padding-block-end: 5px;
+  margin: 10px 40px;
 }
 
 .slider-list::-webkit-scrollbar { display: none; }
@@ -835,7 +834,7 @@ body.nav-active { overflow: hidden; }
 }
 
 .profile-card .card-banner { display: none; }
-
+ 
 .profile-card .card-subtitle { font-size: var(--fontSize-10); }
 
 
@@ -1523,45 +1522,57 @@ main.rowS{
 .col .contents{
 	padding: 0px 30px;
 	border-left: 2px solid #bababa;
+}.col .contents .box {
+    position: relative;
+    padding: 25px; /* Slightly increased padding for more breathing room */
+    border: 1px solid #4a4a4a; /* Slightly lighter border for subtle contrast */
+    border-radius: 15px; /* Slightly reduced border-radius for a cleaner look */
+    cursor: pointer;
+    transition: all 0.3s ease-in-out; /* Smoother transition */
+    margin-bottom: 25px; /* Increased margin-bottom */
+    background-color: #1a1a1a; /* Add a very dark background to the box for depth */
 }
-.col .contents .box{
-	position: relative;
-	padding: 20px;
-	border: 1px solid #eaeaea;
-	background-color: #ffffff;
-	cursor: pointer;
-	transition: all 0.4s;
-	margin-bottom: 20px;
+
+.col .contents .box:hover {
+    box-shadow: 0px 5px 20px 0px rgba(0, 191, 255, 0.2); /* A more prominent, subtle blue shadow on hover */
+    border: 1px solid #00bfff; /* Border color changes to a vibrant blue on hover */
+    transform: translateY(-3px); /* Subtle lift effect on hover */
 }
-.col .contents .box:hover{
-	box-shadow: 0px 3px 12px 0px #ccc;
-	border: 1px solid transparent;
+
+.col .contents .box::before {
+    content: '';
+    position: absolute;
+    width: 18px; /* Slightly larger timeline dot */
+    height: 18px; /* Slightly larger timeline dot */
+    border-radius: 50%;
+    right: calc(100% + 23px); /* Adjusted position for the larger dot */
+    top: 0;
+    background-color: #00bfff; /* Vibrant blue for the timeline dot */
+    border: 3px solid #f0f0f0; /* Brighter white border for the dot */
 }
-.col .contents .box::before{
-	content: '';
-	position: absolute;
-	width: 16px;
-	height: 16px;
-	border-radius: 50%;
-	right: calc(100% + 22px);
-	top: 0;
-	background-color: rgba(0, 123, 255, 0.8);
-	border: 2px solid white;
+
+.box h4 {
+    position: relative;
+    color: #e0e0e0; /* Lighter grey for a softer contrast */
+    font-family: 'Roboto', sans-serif; /* Modern, readable font */
+    font-size: 1.1em; /* Slightly larger font size */
+    margin-bottom: 5px; /* Small margin below h4 */
 }
-.box h4{
-	position: relative;
-	color: rgba(0, 123, 255, 0.8);
+
+.box h3 {
+    font-size: 22px; /* Increased font size for prominence */
+    padding: 8px 0px 8px; /* Adjusted padding */
+    font-family: 'Montserrat', sans-serif; /* Elegant and modern font */
+    color: #f0f0f0; /* Brighter white for headings */
+    font-weight: 600; /* Slightly bolder for emphasis */
+    letter-spacing: 0.5px; /* A bit of letter spacing for readability */
 }
-.box h3{
-	font-size: 19px;
-	padding: 10px 0px 6px;
-	font-family: helvetica;
-	color: #444;
-}
-.box p{
-	line-height: 1.2;
-	color: #666;
-	font-size: 17px;
+
+.box p {
+    line-height: 1.6; /* Increased line height for better readability */
+    color: #b0b0b0; /* Softer grey for body text */
+    font-size: 16px; /* Slightly smaller font size for body text */
+    font-family: 'Open Sans', sans-serif; /* Clean and readable font for paragraphs */
 }
 @media(max-width: 768px){
 	main.rowS{
