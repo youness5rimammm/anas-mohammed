@@ -1545,12 +1545,12 @@ main.rowS{
 	border-radius: 50%;
 	right: calc(100% + 22px);
 	top: 0;
-	background-color: #11a372;
+	background-color: rgba(0, 123, 255, 0.8);
 	border: 2px solid white;
 }
 .box h4{
 	position: relative;
-	color: #11a372;
+	color: rgba(0, 123, 255, 0.8);
 }
 .box h3{
 	font-size: 19px;
@@ -1630,7 +1630,7 @@ main.rowS{
         .skills-banner-section .skills-section-header .Title h1 {
             color: var(--item-text-color); /* Use new text color for title on dark background */
             font-size: 3.2em; /* Slightly larger heading */
-            text-shadow: 0 0 10px var(--item-shadow-glow); /* Subtle glow for the title */
+            /* text-shadow: 0 0 10px var(--item-shadow-glow); Subtle glow for the title */
         }
 
         .skills-banner-container {
