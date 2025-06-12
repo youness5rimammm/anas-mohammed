@@ -1800,3 +1800,34 @@ main.rowS{
                 font-size: 0.9em; /* Smaller font for skill names */
             }
         }
+
+
+        /* project mobile  */
+
+         @media (max-width: 704px){
+
+          /*-----------------------------------*\
+  #PROJECT
+\*-----------------------------------*/
+
+
+
+
+
+.slider-list {
+    display: block
+;
+    align-items: flex-start;
+    gap: 30px;
+    scroll-snap-type: inline mandatory;
+    margin: 10px 40px;
+}
+.slider-item {
+  border: 1px solid #212121;
+margin-bottom: 80px;
+
+ border-radius: 10px;
+    min-width: 100%;
+    scroll-snap-align: start;
+}
+         }
