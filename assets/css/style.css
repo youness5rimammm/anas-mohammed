@@ -1572,3 +1572,221 @@ main.rowS{
 	}
 }
 
+
+/* ::::::::::::: */
+ /* Universal box-sizing for consistent layout */
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* --- Global Section Header Styling (consistent with reviews and contact) --- */
+        .skills-section-header {
+            width: 100%;
+            text-align: center;
+            margin-bottom: 40px; /* Space after the global title */
+        }
+
+        .skills-section-header .Title h1 {
+            font-size: 3em;
+            color: #2c3e50; /* Dark blue-grey */
+            font-weight: 700;
+        }
+
+        /* --- Skills Banner Section Specific Styles --- */
+        /* Define CSS variables for easier adjustment of skill item sizes and animation speed */
+        :root {
+            --skill-item-width: 150px; /* Base width of each skill item */
+            --skill-item-height: 150px; /* Base height of each skill item */
+            --skill-item-gap: 30px; /* Horizontal space between skill items */
+            --animation-duration: 150s; /* UPDATED: Longer duration for more duplicated sets to keep perceived speed */
+            --num-unique-skills: 13; /* UPDATED: Total unique skills (7 languages + 2 frameworks + 4 tools) */
+            --num-duplicated-sets: 5; /* Keeping 5 sets for endless feel on wide screens */
+
+            /* Design specific variables */
+            --item-bg-color: #2a3341; /* Darker background for skill items */
+            --item-border-color: #007bff; /* Bright blue accent border */
+            --item-text-color: #e0e0e0; /* Lighter text on dark background */
+            --item-shadow-glow: rgba(0, 123, 255, 0.6); /* Vibrant blue shadow for accent */
+        }
+
+        .skills-banner-section {
+            width: 100%;
+            max-width: 1400px; /* Max width for the entire banner section */
+            margin-top: 60px; /* Space from previous sections */
+            padding: 40px 0; /* Vertical padding inside the banner section */
+            border-radius: 15px; /* Rounded corners for the section */
+            /* Added inner shadow for more depth, contrasting with outer shadow */
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25), inset 0 0 20px rgba(0, 0, 0, 0.4);
+            overflow: hidden; /* Crucial to hide the overflowing content of the track */
+            text-align: center; /* Center align section header */
+            margin-bottom: 90px;
+        }
+
+        .skills-banner-section .skills-section-header {
+            margin-bottom: 50px; /* Space after the "Our Expertise" title */
+        }
+
+        .skills-banner-section .skills-section-header .Title h1 {
+            color: var(--item-text-color); /* Use new text color for title on dark background */
+            font-size: 3.2em; /* Slightly larger heading */
+            text-shadow: 0 0 10px var(--item-shadow-glow); /* Subtle glow for the title */
+        }
+
+        .skills-banner-container {
+            width: 100%;
+            overflow: hidden; /* Hides the parts of the track that are off-screen */
+            white-space: nowrap; /* Prevents skill items from wrapping to the next line */
+            padding: 20px 0; /* Vertical padding around the scrolling track */
+        }
+
+        .skills-banner-track {
+            display: flex;
+            /* Calculate the total width needed for the animation */
+            width: calc((var(--skill-item-width) + var(--skill-item-gap)) * var(--num-unique-skills) * var(--num-duplicated-sets));
+            animation: scrollSkills var(--animation-duration) linear infinite; /* Apply the animation */
+        }
+
+        .skill-item {
+            flex-shrink: 0; /* Prevents items from shrinking when space is limited */
+            width: var(--skill-item-width);
+            height: var(--skill-item-height);
+            margin-right: var(--skill-item-gap); /* Creates the gap between items */
+            display: flex;
+            flex-direction: column; /* Stacks image and text vertically */
+            justify-content: center; /* Centers content vertically */
+            align-items: center; /* Centers content horizontally */
+            background: linear-gradient(145deg, var(--item-bg-color), #1f2631); /* Subtle dark gradient background */
+            border: 2px solid transparent; /* Prepare for border animation/glow */
+            border-radius: 15px; /* Slightly more rounded */
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4); /* Darker, more diffused shadow */
+            padding: 10px; /* Inner padding */
+            transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                        box-shadow 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                        border-color 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Smooth transition for all properties */
+            position: relative; /* Needed for pseudo-element glow */
+            overflow: hidden; /* Ensure content is clipped if overflowed by pseudo-element */
+        }
+
+        /* Subtle glowing border on hover */
+        .skill-item::before {
+            content: '';
+            position: absolute;
+            inset: -2px; /* Makes it slightly larger than the item */
+            border-radius: 17px; /* Slightly larger border-radius than item */
+            background: conic-gradient(from 0deg at 50% 50%, transparent 0%, var(--item-border-color) 40%, var(--item-border-color) 60%, transparent 100%);
+            z-index: -1; /* Place behind the main content */
+            transition: opacity 0.4s ease, transform 0.4s ease;
+            opacity: 0;
+            transform: scale(0.9);
+        }
+
+        .skill-item:hover::before {
+            opacity: 1;
+            transform: scale(1);
+            animation: rotateBorder 1.5s linear infinite; /* Rotate the border glow */
+        }
+
+        @keyframes rotateBorder {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .skill-item:hover {
+            transform: translateY(-12px) scale(1.05); /* More pronounced lift and scale */
+            box-shadow: 0 8px 30px var(--item-shadow-glow); /* Vibrant blue glowing shadow */
+            border-color: var(--item-border-color); /* Blue border on hover for static border */
+        }
+
+        .skill-item img {
+            width: 80%; /* Makes image slightly smaller than the item box */
+            height: 80%; /* Makes image slightly smaller than the item box */
+            object-fit: contain; /* Ensures the entire image is visible, scaling it down if needed */
+            margin-bottom: 10px; /* Space between image and text */
+            filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.2)); /* Subtle glow for images */
+            transition: transform 0.3s ease, filter 0.3s ease; /* Smooth zoom and glow transition */
+        }
+
+        .skill-item:hover img {
+            transform: scale(1.1); /* Slight zoom effect on the image itself */
+            filter: drop-shadow(0 0 10px rgba(0, 123, 255, 0.8)); /* Stronger blue glow on image */
+        }
+
+        .skill-item p {
+            font-size: 1.2em; /* Slightly larger text */
+            font-weight: 700; /* Bolder text */
+            color: var(--item-text-color); /* Lighter text */
+            text-shadow: 0 0 8px var(--item-shadow-glow); /* More vibrant blue text glow */
+            transition: text-shadow 0.3s ease;
+        }
+
+        /* Keyframes for the continuous scrolling animation */
+        @keyframes scrollSkills {
+          0% {
+            transform: translateX(0); /* Start animation from the beginning of the track */
+          }
+          100% {
+            /* Move left by the exact total width of one set of unique skills.
+               This creates a seamless loop because the duplicated set of skills
+               will have just entered the view as the first set leaves. */
+            transform: translateX(calc(-1 * (var(--skill-item-width) + var(--skill-item-gap)) * var(--num-unique-skills)));
+          }
+        }
+
+        /* --- Responsive Adjustments for the Skills Banner --- */
+
+        /* Tablets and larger phones (up to 1024px) */
+        @media (max-width: 1024px) {
+            :root {
+                --skill-item-width: 120px;
+                --skill-item-height: 120px;
+                --skill-item-gap: 25px;
+                --animation-duration: 110s; /* Proportionately adjusted */
+            }
+            .skills-banner-section .skills-section-header .Title h1 {
+                font-size: 2.5em;
+            }
+            .skill-item p {
+                font-size: 1em; /* Adjust font size for smaller items */
+            }
+        }
+
+        /* Smaller Tablets and larger Mobile devices (up to 768px) */
+        @media (max-width: 768px) {
+            :root {
+                --skill-item-width: 100px;
+                --skill-item-height: 100px;
+                --skill-item-gap: 20px;
+                --animation-duration: 130s; /* Proportionately adjusted */
+            }
+            .skills-banner-section {
+                padding: 30px 0;
+            }
+            .skills-banner-section .skills-section-header {
+                margin-bottom: 30px;
+            }
+            .skills-banner-section .skills-section-header .Title h1 {
+                font-size: 2em;
+            }
+        }
+
+        /* Mobile phones (up to 480px) */
+        @media (max-width: 480px) {
+            :root {
+                --skill-item-width: 80px;
+                --skill-item-height: 80px;
+                --skill-item-gap: 15px;
+                --animation-duration: 150s; /* Proportionately adjusted */
+            }
+            .skills-banner-section {
+                padding: 20px 0;
+            }
+            .skills-banner-section .skills-section-header .Title h1 {
+                font-size: 1.8em;
+            }
+            .skill-item p {
+                font-size: 0.9em; /* Smaller font for skill names */
+            }
+        }
